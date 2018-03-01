@@ -1,6 +1,15 @@
 package IntroToHashMaps;
 
-public class LogSearch {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class LogSearch implements ActionListener {
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -28,4 +37,54 @@ public class LogSearch {
 	 * 				is not in the list. 
 	 *
 	 * */
+	HashMap<Integer, String> studentRoster = new HashMap<>();
+	JButton button1 = new JButton("Add Entry");
+	JButton button2 = new JButton("Search by ID");
+	JButton button3 = new JButton("View List");
+	void setup(){
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		button1.addActionListener(this);
+		button2.addActionListener(this);
+		button3.addActionListener(this);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	public static void main(String[] args) {
+		LogSearch log = new LogSearch();
+		log.setup();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated methostudentRosterd stub
+		
+		if(e.getSource() == button1 ) {
+			String x = JOptionPane.showInputDialog("What is your ID number?");
+			int z = Integer.parseInt(x);
+			String y = JOptionPane.showInputDialog("What is your name?");
+			studentRoster.put(z, y);
+		}
+		if(e.getSource() == button2) {
+			String j = JOptionPane.showInputDialog("Which ID?");
+			int m = Integer.parseInt(j);
+			if(studentRoster.containsKey(m)) {
+				JOptionPane.showMessageDialog(null, "This ID belongs to " + studentRoster.get(m));
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "User does not exist.");
+			}
+		}
+		if(e.getSource() == button3) {
+			StringBuffer buff = new StringBuffer();
+			for (int ID : studentRoster.keySet()) {
+				String mystring = String.format("ID: %5d\tname: %s \n", ID, studentRoster.get(ID));
+				buff.append(mystring);
+			}
+			JOptionPane.showMessageDialog(null, buff.toString());
+		}
+	}
 }
