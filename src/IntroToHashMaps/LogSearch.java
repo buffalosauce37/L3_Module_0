@@ -41,6 +41,7 @@ public class LogSearch implements ActionListener {
 	JButton button1 = new JButton("Add Entry");
 	JButton button2 = new JButton("Search by ID");
 	JButton button3 = new JButton("View List");
+	JButton button4 = new JButton("Remove Entry");
 	void setup(){
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
@@ -48,9 +49,11 @@ public class LogSearch implements ActionListener {
 		panel.add(button1);
 		panel.add(button2);
 		panel.add(button3);
+		panel.add(button4);
 		button1.addActionListener(this);
 		button2.addActionListener(this);
 		button3.addActionListener(this);
+		button4.addActionListener(this);
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -86,5 +89,16 @@ public class LogSearch implements ActionListener {
 			}
 			JOptionPane.showMessageDialog(null, buff.toString());
 		}
+		if(e.getSource() == button4) {
+			String v = JOptionPane.showInputDialog("Which ID?");
+			int a = Integer.parseInt(v);
+			if(studentRoster.containsKey(a)) {
+				studentRoster.remove(a);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "User does not exist.");
+			}
+		}
+		}
 	}
-}
+
