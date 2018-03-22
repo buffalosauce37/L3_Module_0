@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TextUndoRedo implements KeyListener{
+public class TextUndoRedo implements KeyListener {
 	/*
-	 * Create a JFrame withel);
-		panel. a JPanel and a JLabel.
+	 * Create a JFrame withel); panel. a JPanel and a JLabel.
 	 * 
 	 * Every time a key is pressed, add that character to the JLabel. It should look
 	 * like a basic text editor.
@@ -23,16 +22,16 @@ public class TextUndoRedo implements KeyListener{
 	 * the top Character is popped off the Stack and added back to the JLabel.
 	 * 
 	 */
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
 	void setup() {
-	
+
 		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		JLabel label = new JLabel();
 		frame.add(panel);
 		panel.add(label);
 		frame.addKeyListener(this);
 		frame.setVisible(true);
-		frame.setSize(200,200);
+		frame.setSize(200, 200);
 	}
 
 	public static void main(String[] args) {
@@ -43,20 +42,22 @@ public class TextUndoRedo implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		 char velociraptor = e.getKeyChar();
+		char velociraptor = e.getKeyChar();
+		String text = label.getText();
+		text += velociraptor;
+		label.setText(text);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }
