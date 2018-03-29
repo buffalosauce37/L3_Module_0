@@ -2,6 +2,7 @@ package IntroToStacks;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ public class TextUndoRedo implements KeyListener {
 	 * the top Character is popped off the Stack and added back to the JLabel.
 	 * 
 	 */
+	Stack<String> Characters = new Stack<>();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
 	void setup() {
@@ -46,6 +48,11 @@ public class TextUndoRedo implements KeyListener {
 		String text = label.getText();
 		text += velociraptor;
 		label.setText(text);
+		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+		Characters.push(text);
+			String sub = text.substring(0, text.length()-1);
+			label.setText(sub);
+		}
 	}
 
 	@Override
