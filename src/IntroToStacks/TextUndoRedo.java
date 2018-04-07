@@ -23,9 +23,11 @@ public class TextUndoRedo implements KeyListener {
 	 * the top Character is popped off the Stack and added back to the JLabel.
 	 * 
 	 */
+
 	Stack<String> Characters = new Stack<>();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
+	String text = label.getText();
 	void setup() {
 
 		JFrame frame = new JFrame();
@@ -45,16 +47,21 @@ public class TextUndoRedo implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char velociraptor = e.getKeyChar();
-		String text = label.getText();
 		text += velociraptor;
 		label.setText(text);
-		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-		Characters.push(text);
-			String sub = text.substring(0, text.length()-1);
+		if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+			String sub = text.substring(0, text.length()-2);
 			label.setText(sub);
+			Characters.push(text);
 		}
-	}
+		if (e.getKeyChar() == KeyEvent.VK_INSERT) {
+			String undo = Characters.pop();
+			String sub2 = text.substring(0, text.length()-1);
+		label.setText(sub2);
+		}
 
+	}
+    
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
