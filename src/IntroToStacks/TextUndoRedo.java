@@ -24,10 +24,11 @@ public class TextUndoRedo implements KeyListener {
 	 * 
 	 */
 
-	Stack<String> Characters = new Stack<>();
+	Stack<Character> Characters = new Stack<>();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
 	String text = label.getText();
+
 	void setup() {
 
 		JFrame frame = new JFrame();
@@ -46,22 +47,29 @@ public class TextUndoRedo implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		char velociraptor = e.getKeyChar();
-		text += velociraptor;
-		label.setText(text);
+		text = label.getText();
 		if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-			String sub = text.substring(0, text.length()-2);
-			label.setText(sub);
-			Characters.push(text);
-		}
-		if (e.getKeyChar() == KeyEvent.VK_INSERT) {
-			String undo = Characters.pop();
-			String sub2 = text.substring(0, text.length()-1);
-		label.setText(sub2);
+			if (text.length() >= 1) {
+				char removed = text.charAt(text.length() - 1);
+				text = text.substring(0, text.length() - 1);
+				label.setText(text);
+				Characters.push(removed);
+			}
+		} else if (e.getKeyChar() == KeyEvent.VK_0) {
+			if (Characters.size() >= 1) {
+				Character C = Characters.pop();
+				text += C;
+				label.setText(text);
+			}
+		} else {
+			char velociraptor = e.getKeyChar();
+			text += velociraptor;
+			Characters.clear();
+			label.setText(text);
 		}
 
 	}
-    
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
